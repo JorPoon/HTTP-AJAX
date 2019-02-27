@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import FriendsList from './Friends/FriendsList'
 import './App.css';
 
 
@@ -30,14 +30,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          {this.state.friendsList.map(friend => {
+          {/* {this.state.friendsList.map(friend => {
              console.log(friend);
              return <div key={friend.id}>
                       <h1>{friend.name}</h1>
-                      <p>{friend.age}</p>
-                      <p>{friend.email}</p>
+                      <p>Age: {friend.age}</p>
+                      <p>Email: {friend.email}</p>
                     </div>
-          })}
+          })} */}
+          <FriendsList friendsList={this.state.friendsList} />
+          <form>
+            <input type="text" placeholder='name' />
+            <input type="text" placeholder='age'/>
+            <input type="text" placeholder='email'/>
+          </form>
       </div>
     );
   }
