@@ -10,7 +10,10 @@ class App extends Component {
     super();
     this.state= {
       friendsList: [],
-      error: ''
+      error: '',
+      friend: '',
+      age: 0,
+      email: ''
     }
   }
 
@@ -28,11 +31,23 @@ class App extends Component {
     })
   }
 
+  handleChanges = e => {
+    // e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render() {
     return (
       <div className="App">
           <FriendsList friendsList={this.state.friendsList} />
-          <NewFriends/>
+          <NewFriends
+          handleChanges={this.handleChanges}
+          friend={this.state.friend}
+          age={this.state.age}
+          email={this.state.email}
+          />
       </div>
     );
   }
