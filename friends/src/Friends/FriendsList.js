@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom'
 
 const FriendsList = (props) => {
   return (
-    props.friendsList.map(friend => {
+    props.friendsList.map((friend, index) => {
         return (
 
-        <div key={friend.id}>
+        <div key={index}>
         <Link to={`/${friend.id}`} key={friend.id}>Info</Link> 
                  <h1>{friend.name}</h1>
                  <p>Age: {friend.age}</p>

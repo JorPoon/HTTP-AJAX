@@ -13,11 +13,15 @@ class NewFriendForm extends React.Component {
 
   handleChanges = e => {
     e.persist();
+    let value = e.target.value;
+    if (e.target.name === 'age') {
+      value = parseInt(value, 10)
+    }
     // e.preventDefault();
     this.setState(prevState => ({
       friend: {
         ...prevState.friend,
-        [e.target.name]: e.target.value
+        [e.target.name]: value
         }
     }));
     // this.setState({
