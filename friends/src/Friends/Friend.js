@@ -15,6 +15,7 @@ const Friend = ({friends, match, deleteFriend}) => {
         <h1>{friend.name}</h1>
         <p>Age: {friend.age}</p>
         <p>Email: {friend.email}</p>
+        <button onClick={e => deleteFriend(e, friend.id)}> Delete Friend </button>
       </div>
       )
 

@@ -56,6 +56,21 @@ class App extends Component {
     })
   }
 
+  deleteFriend =(e, id) => {
+    e.preventDefault();
+    axios.delete(`http://localhost:5000/friends/${id}`)
+    .then(res => {
+      console.log(res);
+      this.setState({
+        friendsList: res.data
+      });
+      this.props.history.push('/')
+    .catch(err => {
+      console.log(err);
+    })
+    })
+  } 
+
   // addNewFriend = e => {
   //   e.preventDefault();
   //   const newFriend = {
@@ -83,7 +98,7 @@ class App extends Component {
       friendsList={this.state.friendsList} />}
       />
 
-      <Route exact path="/:id"
+      <Route  path="/:id"
       render={ props =>
       <Friend 
         {...props}
