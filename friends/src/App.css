@@ -34,5 +34,12 @@
 
 a {
   border: 1px solid black;
-  margin: 0 15px;
+  margin: 10px 15px;
+  text-decoration: none;
 }
+
+.navBar {
+  margin: 10px 0;
+}
+
+

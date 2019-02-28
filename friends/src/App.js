@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, withRouter, NavLink} from 'react-router-
 import axios from 'axios';
 import FriendsList from './Friends/FriendsList'
 import NewFriendForm from './Friends/NewFriendForm'
+import Friend from './Friends/Friend'
 import './App.css';
 
 
@@ -70,13 +71,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <nav>
+      <nav className="navBar">
         <NavLink to="/friend-form"> Add Friend</NavLink>
-
         <NavLink to="/">Friends' List</NavLink>
       </nav>
+
       <Route exact path="/" 
-      render= { props => <FriendsList {...props} friendsList={this.state.friendsList} />}/>
+      render= { props => 
+      <FriendsList 
+      {...props} 
+      friendsList={this.state.friendsList} />}
+      />
+
+      <Route exact path="/:id"
+      render={ props =>
+      <Friend 
+        {...props}
+        deleteFriend={this.deleteFriend}
+        friends={this.state.friendsList}
+      />}
+      />
          
           {/* <NewFriendForm
           handleChanges={this.handleChanges}
