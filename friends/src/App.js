@@ -13,9 +13,7 @@ class App extends Component {
     this.state= {
       friendsList: [],
       error: '',
-      // friend: '',
-      // age: 0,
-      // email: ''
+      activeFriend: null,
     }
   }
 
@@ -33,12 +31,6 @@ class App extends Component {
     })
   }
 
-  // handleChanges = e => {
-  //   // e.preventDefault();
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
 
   addFriend = (e, friend) => {
     e.preventDefault();
@@ -71,17 +63,28 @@ class App extends Component {
     })
   } 
 
-  // addNewFriend = e => {
-  //   e.preventDefault();
-  //   const newFriend = {
-  //     friend: this.state.friend,
-  //     age: this.state.age,
-  //     email: this.state.email
-  //   }
-  //   this.setState({
-  //     friendsList:[...this.state.friendsList, newFriend]
-  //   })
-  // }
+  setUpdateForm = (e, friend) => {
+    e.preventDefault();
+    this.setState({
+      activeFriend: friend,
+    })
+    this.props.history.push('/friend-form');
+  }
+
+  updateFriend = (e, friend) => {
+    e.preventDefault();
+    axios
+    .put(`http://localhost:5000/friends/${friend.id}`, friend)
+    .then( res => {
+      console.log(res);
+      this.setState({
+        activeFriend: null,
+        friendsList: res.data,
+      })
+    })
+  }
+
+
 
   render() {
     return (
@@ -104,6 +107,8 @@ class App extends Component {
         {...props}
         deleteFriend={this.deleteFriend}
         friends={this.state.friendsList}
+        setUpdateForm={this.setUpdateForm}
+        
       />}
       />
          
@@ -117,6 +122,8 @@ class App extends Component {
           <NewFriendForm 
           {...props} 
           addFriend={this.addFriend}
+          updateFriend={this.updateFriend}
+          activeFriend={this.state.activeFriend}
           />}/>
           
       </div>

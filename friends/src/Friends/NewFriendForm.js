@@ -4,10 +4,18 @@ import React from 'react'
 //change this into a class component
 class NewFriendForm extends React.Component {
   state= {
-    friend: {
+    friend: this.props.activeFriend || {
       name: "",
       age: "",
       email: ""
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    if(this.props.activeFriend && prevProps.activeFriend !== this.props.activeFriend) {
+      this.setState({
+        friend: this.props.activeFriend,
+      })
     }
   }
 
@@ -33,7 +41,11 @@ class NewFriendForm extends React.Component {
   }
 
   handleSubmit = e => {
-    this.props.addFriend(e, this.state.friend);
+    if(this.props.activeFriend) {
+      this.props.updateFriend(e, this.state.friend)
+    } else {
+      this.props.addFriend(e, this.state.friend);
+    }
     this.setState({
       friend: {
         name: "",
@@ -68,7 +80,7 @@ render() {
         value={this.state.friend.email}
         onChange={this.handleChanges}
         />
-        <button>Add Friend</button>
+        <button>{`${this.props.activeFriend? 'Update': 'Add'} Friend`}</button>
       </form>
     )
   } 
