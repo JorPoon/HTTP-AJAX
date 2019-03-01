@@ -50,16 +50,17 @@ class App extends Component {
 
   deleteFriend =(e, id) => {
     e.preventDefault();
-    axios.delete(`http://localhost:5000/friends/${id}`)
+    axios
+    .delete(`http://localhost:5000/friends/${id}`)
     .then(res => {
       console.log(res);
       this.setState({
         friendsList: res.data
       });
       this.props.history.push('/')
-    .catch(err => {
-      console.log(err);
     })
+    .catch(err => {
+    console.log(err);
     })
   } 
 
@@ -73,15 +74,19 @@ class App extends Component {
 
   updateFriend = (e, friend) => {
     e.preventDefault();
-    axios
-    .put(`http://localhost:5000/friends/${friend.id}`, friend)
+    axios.put(`http://localhost:5000/friends/${friend.id}`, friend)
     .then( res => {
       console.log(res);
       this.setState({
         activeFriend: null,
         friendsList: res.data,
       })
+      this.props.history.push('/');
     })
+    .catch(err => {
+      console.log(err);
+    });
+
   }
 
 
